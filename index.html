@@ -4,64 +4,172 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Pet Shop Vila Vitória - Excelência em cada detalhe, o carinho que eles merecem. Referência em estética e saúde animal no Setor Marista.">
-    
-    <title>Pet Shop Vila Vitória | Heritage & Care</title>
-    
+    <title>Pet Shop Vila Vitória | Heritage &amp; Care</title>
+
     <!-- Tailwind CSS v4 CDN -->
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    
-    <!-- Google Fonts: Playfair Display (Serif Elegant) & Inter (Sans-serif Minimalist) -->
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body class="bg-pearl text-charcoal font-sans antialiased overflow-x-hidden selection:bg-midnight selection:text-white">
 
-    <!-- Navbar -->
+    <style type="text/tailwindcss">
+        @theme {
+            --color-pearl: #FCFAF8;
+            --color-midnight: #1A365D;
+            --color-slate-custom: #4B5563;
+            --color-charcoal: #111827;
+            --color-sand: #F3F0EB;
+            --color-gold: #D4AF37;
+
+            --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+            --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
+        }
+
+        html {
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        /* Glassmorphism Header */
+        .header-glass {
+            background-color: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.6);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        /* Reveal animations */
+        .reveal {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .reveal.fade-up {
+            transform: translateY(28px);
+        }
+        .reveal.zoom-in {
+            transform: scale(0.97);
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        visibility 0s linear 0s;
+        }
+
+        /* Stagger delays */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+        .delay-500 { transition-delay: 500ms; }
+
+        /* Card hover */
+        .card-premium {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-premium:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Portfolio zoom */
+        .portfolio-img {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .portfolio-card:hover .portfolio-img {
+            transform: scale(1.06);
+        }
+
+        /* FAQ Accordion */
+        .faq-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out;
+        }
+        .faq-content > div { overflow: hidden; }
+        .faq-item.active .faq-content {
+            grid-template-rows: 1fr;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: #FCFAF8; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4B5563; }
+
+        /* Image Overlay */
+        .portfolio-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .portfolio-card:hover .portfolio-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-[#FCFAF8] text-[#111827] antialiased overflow-x-hidden" style="font-family: 'Inter', sans-serif;">
+
+    <!-- ===================== HEADER ===================== -->
     <header id="header" class="fixed w-full top-0 z-50 transition-all duration-300 py-4 border-b border-transparent">
         <div class="container mx-auto px-6 md:px-12">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <a href="#" class="flex flex-col items-center">
-                    <span class="font-serif text-2xl font-bold text-midnight tracking-tight leading-none">Vila Vitória</span>
-                    <span class="text-[0.65rem] tracking-[0.2em] font-medium text-slate uppercase mt-1">Pet Boutique</span>
+                    <span class="text-2xl font-bold text-[#1A365D] tracking-tight leading-none" style="font-family:'Playfair Display',serif;">Vila Vitória</span>
+                    <span class="text-[0.62rem] tracking-[0.2em] font-semibold text-[#4B5563] uppercase mt-0.5">Pet Boutique</span>
                 </a>
-                
+
                 <!-- Desktop Nav -->
-                <nav class="hidden md:flex items-center gap-8">
-                    <a href="#sobre" class="text-sm font-medium text-slate hover:text-midnight transition-colors">Sobre</a>
-                    <a href="#servicos" class="text-sm font-medium text-slate hover:text-midnight transition-colors">Serviços</a>
-                    <a href="#portfolio" class="text-sm font-medium text-slate hover:text-midnight transition-colors">Portfólio</a>
-                    <a href="#faq" class="text-sm font-medium text-slate hover:text-midnight transition-colors">FAQ</a>
+                <nav class="hidden md:flex items-center gap-8" aria-label="Menu principal">
+                    <a href="#sobre" class="text-sm font-medium text-[#4B5563] hover:text-[#1A365D] transition-colors">Sobre</a>
+                    <a href="#servicos" class="text-sm font-medium text-[#4B5563] hover:text-[#1A365D] transition-colors">Serviços</a>
+                    <a href="#portfolio" class="text-sm font-medium text-[#4B5563] hover:text-[#1A365D] transition-colors">Portfólio</a>
+                    <a href="#faq" class="text-sm font-medium text-[#4B5563] hover:text-[#1A365D] transition-colors">FAQ</a>
                 </nav>
-                
-                <!-- CTA & Mobile Toggle -->
+
+                <!-- CTA + Mobile toggle -->
                 <div class="flex items-center gap-4">
-                    <a href="#contato" class="hidden md:inline-flex items-center justify-center px-6 py-2.5 bg-midnight text-white text-sm font-medium rounded-full hover:bg-midnight/90 transition-all hover:shadow-lg hover:-translate-y-0.5" aria-label="Agendar Visita">
+                    <a href="#contato" class="hidden md:inline-flex items-center justify-center px-6 py-2.5 bg-[#1A365D] text-white text-sm font-medium rounded-full hover:bg-[#1A365D]/90 transition-all hover:shadow-lg hover:-translate-y-0.5" aria-label="Agendar Visita">
                         Agendar Visita
                     </a>
-                    
-                    <button id="mobile-menu-btn" class="md:hidden text-midnight focus:outline-none" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
-                        <i data-lucide="menu" stroke-width="1.5"></i>
+                    <button id="mobile-menu-btn" class="md:hidden text-[#1A365D] focus:outline-none focus:ring-2 focus:ring-[#1A365D]/30 rounded-md p-1" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+                        <i data-lucide="menu" stroke-width="1.5" class="w-6 h-6"></i>
                     </button>
                 </div>
             </div>
         </div>
-        
-        <!-- Mobile Nav (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm" aria-hidden="true">
-            <div class="flex flex-col px-6 py-4 space-y-4">
-                <a href="#sobre" class="text-base font-medium text-slate hover:text-midnight transition-colors">Sobre</a>
-                <a href="#servicos" class="text-base font-medium text-slate hover:text-midnight transition-colors">Serviços</a>
-                <a href="#portfolio" class="text-base font-medium text-slate hover:text-midnight transition-colors">Portfólio</a>
-                <a href="#faq" class="text-base font-medium text-slate hover:text-midnight transition-colors">FAQ</a>
-                <a href="#contato" class="inline-flex items-center justify-center px-6 py-3 mt-2 bg-midnight text-white text-sm font-medium rounded-full">
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white/96 backdrop-blur-md border-b border-gray-100 shadow-sm" aria-hidden="true">
+            <div class="flex flex-col px-6 py-5 space-y-4">
+                <a href="#sobre" class="text-base font-medium text-[#4B5563] hover:text-[#1A365D] transition-colors">Sobre</a>
+                <a href="#servicos" class="text-base font-medium text-[#4B5563] hover:text-[#1A365D] transition-colors">Serviços</a>
+                <a href="#portfolio" class="text-base font-medium text-[#4B5563] hover:text-[#1A365D] transition-colors">Portfólio</a>
+                <a href="#faq" class="text-base font-medium text-[#4B5563] hover:text-[#1A365D] transition-colors">FAQ</a>
+                <a href="#contato" class="inline-flex items-center justify-center px-6 py-3 bg-[#1A365D] text-white text-sm font-medium rounded-full">
                     Agendar Visita
                 </a>
             </div>
@@ -69,264 +177,238 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section class="relative min-h-screen flex items-center pt-24 overflow-hidden">
+        <!-- ===================== HERO ===================== -->
+        <section class="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden bg-[#FCFAF8]">
             <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                
+
                 <!-- Content -->
                 <div class="z-10 py-12 lg:py-0" data-animate="fade-up">
-                    <div class="inline-block px-4 py-1.5 rounded-full bg-sand text-midnight text-xs font-semibold tracking-widest uppercase mb-6" data-animate="fade-up" data-stagger="100">
-                        Estética & Clínica Prime
+                    <div class="inline-block px-4 py-1.5 rounded-full bg-[#F3F0EB] text-[#1A365D] text-xs font-semibold tracking-widest uppercase mb-6">
+                        Estética &amp; Clínica Prime
                     </div>
-                    
-                    <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-midnight font-bold leading-tight mb-6" data-animate="fade-up" data-stagger="200">
-                        A excelência em cada detalhe, <br/>
-                        <span class="italic font-light text-slate">o carinho que eles merecem.</span>
+
+                    <h1 class="text-4xl md:text-5xl lg:text-[3.4rem] text-[#1A365D] font-bold leading-[1.15] mb-6" style="font-family:'Playfair Display',serif;">
+                        A excelência em cada detalhe,
+                        <span class="italic font-light text-[#4B5563]"> o carinho que eles merecem.</span>
                     </h1>
-                    
-                    <p class="text-base md:text-lg text-slate mb-8 max-w-lg leading-relaxed" data-animate="fade-up" data-stagger="300">
+
+                    <p class="text-base md:text-lg text-[#4B5563] mb-8 max-w-lg leading-relaxed">
                         Unimos medicina veterinária de ponta e estética de luxo para proporcionar uma experiência inesquecível ao seu melhor amigo.
                     </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4" data-animate="fade-up" data-stagger="400">
-                        <a href="#servicos" class="inline-flex items-center justify-center px-8 py-4 bg-midnight text-white font-medium rounded-full hover:bg-midnight/90 transition-all hover:shadow-xl hover:-translate-y-1">
+
+                    <div class="flex flex-col sm:flex-row gap-4" data-animate="fade-up" data-stagger="200">
+                        <a href="#servicos" class="inline-flex items-center justify-center px-8 py-4 bg-[#1A365D] text-white font-medium rounded-full hover:bg-[#1A365D]/90 transition-all hover:shadow-xl hover:-translate-y-1">
                             Nossos Serviços
                         </a>
-                        <a href="#contato" class="inline-flex items-center justify-center px-8 py-4 bg-transparent border border-gray-300 text-midnight font-medium rounded-full hover:bg-sand transition-all">
+                        <a href="#contato" class="inline-flex items-center justify-center px-8 py-4 bg-transparent border border-gray-300 text-[#1A365D] font-medium rounded-full hover:bg-[#F3F0EB] transition-all">
                             Ver Unidade <i data-lucide="arrow-right" class="ml-2 w-4 h-4" stroke-width="2"></i>
                         </a>
                     </div>
-                    
-                    <!-- Trust Badges Mini -->
-                    <div class="mt-12 flex items-center gap-6 text-sm text-slate font-medium" data-animate="fade-up" data-stagger="500">
+
+                    <!-- Trust badges -->
+                    <div class="mt-12 flex flex-wrap items-center gap-6 text-sm text-[#4B5563] font-medium" data-animate="fade-up" data-stagger="300">
                         <div class="flex items-center gap-2">
-                            <i data-lucide="shield-check" class="text-midnight w-5 h-5"></i> Segurança 24h
+                            <i data-lucide="shield-check" class="text-[#1A365D] w-5 h-5" stroke-width="1.5"></i> Segurança 24h
                         </div>
                         <div class="flex items-center gap-2">
-                            <i data-lucide="award" class="text-midnight w-5 h-5"></i> Profissionais Certificados
+                            <i data-lucide="award" class="text-[#1A365D] w-5 h-5" stroke-width="1.5"></i> Profissionais Certificados
                         </div>
                     </div>
                 </div>
-                
-                <!-- Image Asymmetric (Placeholder from Unsplash) -->
-                <div class="relative h-[60vh] lg:h-[85vh] w-full rounded-3xl overflow-hidden shadow-2xl" data-animate="zoom-in" data-stagger="200">
-                    <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=1000" alt="Golden Retriever em ambiente de spa limpo e relaxante" class="absolute inset-0 w-full h-full object-cover" />
-                    <div class="absolute inset-0 bg-gradient-to-t from-midnight/20 to-transparent"></div>
+
+                <!-- Hero Image -->
+                <div class="relative h-[60vh] lg:h-[85vh] w-full rounded-3xl overflow-hidden shadow-2xl" data-animate="zoom-in" data-stagger="100">
+                    <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=1000" alt="Golden Retriever em ambiente de spa limpo e relaxante" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#1A365D]/20 to-transparent pointer-events-none"></div>
                 </div>
-                
+
             </div>
         </section>
 
-        <!-- Social Proof -->
+        <!-- ===================== SOCIAL PROOF ===================== -->
         <section class="py-12 border-y border-gray-100 bg-white">
             <div class="container mx-auto px-6 md:px-12 text-center">
-                <p class="text-xs font-semibold tracking-widest text-slate uppercase mb-8" data-animate="fade-up">Parceiros em Nutrição e Saúde Animal</p>
-                <div class="flex flex-wrap justify-center items-center gap-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-500" data-animate="fade-up" data-stagger="100">
-                    <!-- Text placeholders mapping to logos -->
-                    <span class="font-serif text-2xl font-bold">Royal Canin</span>
-                    <span class="font-serif text-2xl font-bold tracking-widest">VIRBAC</span>
-                    <span class="font-sans text-2xl font-black">zeedog</span>
-                    <span class="font-serif text-2xl font-bold tracking-widest">Bravecto</span>
+                <p class="text-[0.7rem] font-semibold tracking-[0.2em] text-[#4B5563] uppercase mb-8" data-animate="fade-up">Parceiros em Nutrição e Saúde Animal</p>
+                <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-50 grayscale hover:opacity-80 hover:grayscale-0 transition-all duration-500" data-animate="fade-up" data-stagger="100">
+                    <span class="text-xl font-bold" style="font-family:'Playfair Display',serif;">Royal Canin</span>
+                    <span class="text-xl font-black tracking-widest text-gray-800">VIRBAC</span>
+                    <span class="text-xl font-black">zeedog</span>
+                    <span class="text-xl font-bold tracking-widest" style="font-family:'Playfair Display',serif;">Bravecto</span>
                 </div>
             </div>
         </section>
 
-        <!-- Secção Sobre e Filosofia -->
-        <section id="sobre" class="py-24 bg-pearl relative">
+        <!-- ===================== SOBRE ===================== -->
+        <section id="sobre" class="py-24 bg-[#FCFAF8]">
             <div class="container mx-auto px-6 md:px-12">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    
+
                     <!-- Images Grid -->
-                    <div class="grid grid-cols-2 gap-4 relative" data-animate="fade-up">
-                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600" alt="Veterinária examinando cachorro" class="rounded-2xl w-full h-64 object-cover shadow-lg mt-8" />
-                        <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=600" alt="Cachorro em banho relaxante" class="rounded-2xl w-full h-80 object-cover shadow-xl" />
-                        
-                        <!-- Floating Badge -->
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-full shadow-2xl flex items-center justify-center w-32 h-32">
+                    <div class="relative grid grid-cols-2 gap-4" data-animate="fade-up">
+                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600" alt="Veterinária examinando cachorro" class="rounded-2xl w-full h-64 object-cover shadow-lg mt-8" loading="lazy" />
+                        <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=600" alt="Cachorro em banho relaxante" class="rounded-2xl w-full h-80 object-cover shadow-xl" loading="lazy" />
+                        <!-- Badge -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-5 rounded-full shadow-2xl flex items-center justify-center w-28 h-28">
                             <div class="text-center">
-                                <span class="block text-3xl font-serif text-midnight font-bold">10+</span>
-                                <span class="text-[0.6rem] uppercase tracking-widest text-slate font-medium">Anos de<br/>Experiência</span>
+                                <span class="block text-2xl font-bold text-[#1A365D]" style="font-family:'Playfair Display',serif;">10+</span>
+                                <span class="text-[0.55rem] uppercase tracking-widest text-[#4B5563] font-medium">Anos de<br/>Experiência</span>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Content -->
                     <div data-animate="fade-up" data-stagger="200">
                         <div class="flex items-center gap-3 mb-4">
-                            <div class="w-12 h-[1px] bg-midnight"></div>
-                            <span class="text-sm font-semibold tracking-widest text-midnight uppercase">Nossa Filosofia</span>
+                            <div class="w-10 h-px bg-[#1A365D]"></div>
+                            <span class="text-xs font-semibold tracking-[0.2em] text-[#1A365D] uppercase">Nossa Filosofia</span>
                         </div>
-                        
-                        <h2 class="font-serif text-3xl md:text-4xl text-midnight font-bold mb-6">
+
+                        <h2 class="text-3xl md:text-4xl text-[#1A365D] font-bold mb-6" style="font-family:'Playfair Display',serif;">
                             O conceito de Bem-Estar Multissensorial.
                         </h2>
-                        
-                        <p class="text-slate leading-relaxed mb-8">
+
+                        <p class="text-[#4B5563] leading-relaxed mb-8">
                             Na Vila Vitória, acreditamos que o cuidado animal vai muito além do básico. Desenvolvemos uma metodologia única que integra saúde de alta performance com terapias de relaxamento estético. Seu pet não apenas sai limpo e saudável, ele vivencia um dia de spa revigorante, projetado para reduzir o estresse e promover alegria.
                         </p>
-                        
+
                         <div class="space-y-6">
                             <div class="flex items-start gap-4">
-                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-sand flex items-center justify-center text-midnight">
-                                    <i data-lucide="scale" stroke-width="1.5"></i>
+                                <div class="flex-shrink-0 w-11 h-11 rounded-full bg-[#F3F0EB] flex items-center justify-center text-[#1A365D]">
+                                    <i data-lucide="scale" stroke-width="1.5" class="w-5 h-5"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-charcoal mb-1">Ética Inegociável</h3>
-                                    <p class="text-sm text-slate">Utilizamos apenas produtos homologados, toalhas esterilizadas individualmente e protocolos veterinários estritos.</p>
+                                    <h3 class="font-bold text-[#111827] mb-1">Ética Inegociável</h3>
+                                    <p class="text-sm text-[#4B5563]">Utilizamos apenas produtos homologados, toalhas esterilizadas individualmente e protocolos veterinários estritos.</p>
                                 </div>
                             </div>
-                            
                             <div class="flex items-start gap-4">
-                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-sand flex items-center justify-center text-midnight">
-                                    <i data-lucide="heart" stroke-width="1.5"></i>
+                                <div class="flex-shrink-0 w-11 h-11 rounded-full bg-[#F3F0EB] flex items-center justify-center text-[#1A365D]">
+                                    <i data-lucide="heart" stroke-width="1.5" class="w-5 h-5"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-charcoal mb-1">Cuidado Individualizado</h3>
-                                    <p class="text-sm text-slate">Cada animal possui um dossiê biométrico, onde mapeamos preferências, alergias e limites de estresse.</p>
+                                    <h3 class="font-bold text-[#111827] mb-1">Cuidado Individualizado</h3>
+                                    <p class="text-sm text-[#4B5563]">Cada animal possui um dossiê biométrico, onde mapeamos preferências, alergias e limites de estresse.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </section>
 
-        <!-- Secção de Processo (O Protocolo Vila Vitória) -->
+        <!-- ===================== PROTOCOLO ===================== -->
         <section class="py-24 bg-white border-t border-gray-100">
             <div class="container mx-auto px-6 md:px-12">
-                <div class="text-center max-w-3xl mx-auto mb-16" data-animate="fade-up">
-                    <span class="text-sm font-semibold tracking-widest text-midnight uppercase block mb-4">A Jornada do Cliente</span>
-                    <h2 class="font-serif text-3xl md:text-4xl text-midnight font-bold mb-6">
-                        O Protocolo Vila Vitória
-                    </h2>
-                    <p class="text-slate">Desenhado para garantir o máximo de conforto, segurança e transparência em todas as etapas da visita do seu pet.</p>
+                <div class="text-center max-w-2xl mx-auto mb-16" data-animate="fade-up">
+                    <span class="text-xs font-semibold tracking-[0.2em] text-[#1A365D] uppercase block mb-4">A Jornada do Cliente</span>
+                    <h2 class="text-3xl md:text-4xl text-[#1A365D] font-bold mb-4" style="font-family:'Playfair Display',serif;">O Protocolo Vila Vitória</h2>
+                    <p class="text-[#4B5563]">Desenhado para garantir o máximo de conforto, segurança e transparência em todas as etapas.</p>
                 </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- Step 1 -->
-                    <div class="relative group" data-animate="fade-up" data-stagger="100">
-                        <div class="absolute -inset-0.5 bg-gradient-to-r from-sand to-transparent opacity-0 group-hover:opacity-100 transition duration-500 rounded-2xl blur"></div>
-                        <div class="relative bg-white border border-gray-100 p-8 rounded-2xl h-full card-premium">
-                            <span class="text-5xl font-serif font-black text-sand mb-6 block">01</span>
-                            <h3 class="text-xl font-bold text-midnight mb-3">Recepção Acolhedora</h3>
-                            <p class="text-slate text-sm leading-relaxed">Boas-vindas em um ambiente climatizado e livre de odores hospitalares. Primeiro contato focado em reduzir a ansiedade.</p>
-                        </div>
+                    <div class="bg-[#FCFAF8] border border-gray-100 p-8 rounded-2xl card-premium" data-animate="fade-up" data-stagger="100">
+                        <span class="text-4xl font-bold text-[#F3F0EB] mb-6 block" style="font-family:'Playfair Display',serif;color:#e5e0d8;">01</span>
+                        <h3 class="text-lg font-bold text-[#1A365D] mb-3">Recepção Acolhedora</h3>
+                        <p class="text-[#4B5563] text-sm leading-relaxed">Boas-vindas em ambiente climatizado e livre de odores hospitalares, focado em reduzir a ansiedade.</p>
                     </div>
-                    
                     <!-- Step 2 -->
-                    <div class="relative group" data-animate="fade-up" data-stagger="200">
-                        <div class="absolute -inset-0.5 bg-gradient-to-r from-sand to-transparent opacity-0 group-hover:opacity-100 transition duration-500 rounded-2xl blur"></div>
-                        <div class="relative bg-white border border-gray-100 p-8 rounded-2xl h-full card-premium">
-                            <span class="text-5xl font-serif font-black text-sand mb-6 block">02</span>
-                            <h3 class="text-xl font-bold text-midnight mb-3">Avaliação Bioestética</h3>
-                            <p class="text-slate text-sm leading-relaxed">Check-up inicial de pele, pelagem e orelhas por nossos especialistas para definir os produtos e a abordagem ideal.</p>
-                        </div>
+                    <div class="bg-[#FCFAF8] border border-gray-100 p-8 rounded-2xl card-premium" data-animate="fade-up" data-stagger="200">
+                        <span class="text-4xl font-bold mb-6 block" style="font-family:'Playfair Display',serif;color:#e5e0d8;">02</span>
+                        <h3 class="text-lg font-bold text-[#1A365D] mb-3">Avaliação Bioestética</h3>
+                        <p class="text-[#4B5563] text-sm leading-relaxed">Check-up inicial de pele, pelagem e orelhas para definir os produtos e a abordagem ideal.</p>
                     </div>
-                    
                     <!-- Step 3 -->
-                    <div class="relative group" data-animate="fade-up" data-stagger="300">
-                        <div class="absolute -inset-0.5 bg-gradient-to-r from-sand to-transparent opacity-0 group-hover:opacity-100 transition duration-500 rounded-2xl blur"></div>
-                        <div class="relative bg-white border border-gray-100 p-8 rounded-2xl h-full card-premium">
-                            <span class="text-5xl font-serif font-black text-sand mb-6 block">03</span>
-                            <h3 class="text-xl font-bold text-midnight mb-3">Execução Especializada</h3>
-                            <p class="text-slate text-sm leading-relaxed">Banhos terapêuticos com água ozonizada e tosa na tesoura realizada por groomers premiados em cabines de vidro.</p>
-                        </div>
+                    <div class="bg-[#FCFAF8] border border-gray-100 p-8 rounded-2xl card-premium" data-animate="fade-up" data-stagger="300">
+                        <span class="text-4xl font-bold mb-6 block" style="font-family:'Playfair Display',serif;color:#e5e0d8;">03</span>
+                        <h3 class="text-lg font-bold text-[#1A365D] mb-3">Execução Especializada</h3>
+                        <p class="text-[#4B5563] text-sm leading-relaxed">Banhos terapêuticos com água ozonizada e tosa tesoura realizada por groomers premiados.</p>
                     </div>
-                    
                     <!-- Step 4 -->
-                    <div class="relative group" data-animate="fade-up" data-stagger="400">
-                        <div class="absolute -inset-0.5 bg-gradient-to-r from-sand to-transparent opacity-0 group-hover:opacity-100 transition duration-500 rounded-2xl blur"></div>
-                        <div class="relative bg-white border border-gray-100 p-8 rounded-2xl h-full card-premium">
-                            <span class="text-5xl font-serif font-black text-sand mb-6 block">04</span>
-                            <h3 class="text-xl font-bold text-midnight mb-3">Check-out & Mimos</h3>
-                            <p class="text-slate text-sm leading-relaxed">Entrega do pet perfumado e relaxado, com um relatório do serviço, um mimo especial e uma foto polaroid se desejar.</p>
-                        </div>
+                    <div class="bg-[#FCFAF8] border border-gray-100 p-8 rounded-2xl card-premium" data-animate="fade-up" data-stagger="400">
+                        <span class="text-4xl font-bold mb-6 block" style="font-family:'Playfair Display',serif;color:#e5e0d8;">04</span>
+                        <h3 class="text-lg font-bold text-[#1A365D] mb-3">Check-out &amp; Mimos</h3>
+                        <p class="text-[#4B5563] text-sm leading-relaxed">Entrega com relatório do serviço, mimo especial e foto polaroid a seu pedido.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Secção de Serviços -->
-        <section id="servicos" class="py-24 bg-pearl">
+        <!-- ===================== SERVIÇOS ===================== -->
+        <section id="servicos" class="py-24 bg-[#FCFAF8]">
             <div class="container mx-auto px-6 md:px-12">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
                     <div class="max-w-2xl" data-animate="fade-up">
-                        <span class="text-sm font-semibold tracking-widest text-midnight uppercase block mb-4">Nossa Expertise</span>
-                        <h2 class="font-serif text-3xl md:text-5xl text-midnight font-bold">
-                            Serviços de Excelência
-                        </h2>
+                        <span class="text-xs font-semibold tracking-[0.2em] text-[#1A365D] uppercase block mb-4">Nossa Expertise</span>
+                        <h2 class="text-3xl md:text-5xl text-[#1A365D] font-bold" style="font-family:'Playfair Display',serif;">Serviços de Excelência</h2>
                     </div>
-                    <div data-animate="fade-up" data-stagger="200">
-                        <p class="text-slate text-base md:text-lg max-w-md">Estrutura de ponta para atender os padrões de exigência mais altos, unindo saúde e estética.</p>
-                    </div>
+                    <p class="text-[#4B5563] text-base max-w-md" data-animate="fade-up" data-stagger="200">Estrutura de ponta para atender os padrões de exigência mais altos.</p>
                 </div>
-                
+
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Service 1 -->
-                    <div class="bg-white rounded-3xl overflow-hidden card-premium border border-gray-100" data-animate="fade-up" data-stagger="100">
+                    <!-- Spa Card -->
+                    <div class="bg-white rounded-3xl overflow-hidden card-premium border border-gray-100 shadow-sm" data-animate="fade-up" data-stagger="100">
                         <div class="h-64 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?auto=format&fit=crop&q=80&w=800" alt="Spa e Estética Pet" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-full text-midnight">
-                                <i data-lucide="scissors" stroke-width="1.5"></i>
+                            <img src="https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?auto=format&fit=crop&q=80&w=800" alt="Spa e Estética Pet" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-full text-[#1A365D]">
+                                <i data-lucide="scissors" stroke-width="1.5" class="w-5 h-5"></i>
                             </div>
                         </div>
                         <div class="p-8">
-                            <h3 class="font-serif text-2xl text-midnight font-bold mb-4">Spa & Estética</h3>
-                            <p class="text-slate mb-6 line-clamp-3">Mergulhe na experiência do nosso spa. Oferecemos banhos terapêuticos com hidromassagem, cromoterapia, e Tosa Tesoura Premium personalizada para cada raça.</p>
-                            <ul class="space-y-3 mb-8">
-                                <li class="flex items-center text-sm text-charcoal font-medium"><i data-lucide="check" class="text-midnight w-4 h-4 mr-2"></i> Banhos com Água Ozonizada</li>
-                                <li class="flex items-center text-sm text-charcoal font-medium"><i data-lucide="check" class="text-midnight w-4 h-4 mr-2"></i> Hidratação Profunda</li>
-                                <li class="flex items-center text-sm text-charcoal font-medium"><i data-lucide="check" class="text-midnight w-4 h-4 mr-2"></i> Tosa Específica da Raça</li>
+                            <h3 class="text-2xl text-[#1A365D] font-bold mb-4" style="font-family:'Playfair Display',serif;">Spa &amp; Estética</h3>
+                            <p class="text-[#4B5563] mb-6 text-sm leading-relaxed">Banhos terapêuticos com hidromassagem e cromoterapia. Tosa Tesoura Premium personalizada para cada raça.</p>
+                            <ul class="space-y-2 mb-8">
+                                <li class="flex items-center text-sm text-[#111827] font-medium"><i data-lucide="check" class="text-[#1A365D] w-4 h-4 mr-2" stroke-width="2.5"></i>Banhos com Água Ozonizada</li>
+                                <li class="flex items-center text-sm text-[#111827] font-medium"><i data-lucide="check" class="text-[#1A365D] w-4 h-4 mr-2" stroke-width="2.5"></i>Hidratação Profunda</li>
+                                <li class="flex items-center text-sm text-[#111827] font-medium"><i data-lucide="check" class="text-[#1A365D] w-4 h-4 mr-2" stroke-width="2.5"></i>Tosa Específica da Raça</li>
                             </ul>
-                            <a href="#contato" class="text-midnight font-bold text-sm uppercase tracking-widest hover:text-slate transition-colors inline-flex items-center">
+                            <a href="#contato" class="text-[#1A365D] font-bold text-xs uppercase tracking-widest hover:text-[#4B5563] transition-colors inline-flex items-center">
                                 Agendar <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Service 2 -->
-                    <div class="bg-midnight rounded-3xl overflow-hidden card-premium text-white relative" data-animate="fade-up" data-stagger="200">
-                        <!-- Decorative background element -->
-                        <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-                        
+                    <!-- Clínica Card (dark) -->
+                    <div class="bg-[#1A365D] rounded-3xl overflow-hidden card-premium text-white relative shadow-xl" data-animate="fade-up" data-stagger="200">
+                        <div class="absolute top-0 right-0 w-56 h-56 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
                         <div class="h-64 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&q=80&w=800" alt="Clínica Veterinária" class="w-full h-full object-cover opacity-80 mix-blend-overlay transition-transform duration-700 hover:scale-105" />
-                            <div class="absolute top-4 right-4 bg-midnight/90 backdrop-blur-sm p-3 rounded-full text-white border border-white/20">
-                                <i data-lucide="stethoscope" stroke-width="1.5"></i>
+                            <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&q=80&w=800" alt="Clínica Veterinária" class="w-full h-full object-cover opacity-50 transition-transform duration-700 hover:scale-105" loading="lazy" />
+                            <div class="absolute top-4 right-4 bg-[#1A365D]/80 backdrop-blur-sm p-3 rounded-full border border-white/20">
+                                <i data-lucide="stethoscope" stroke-width="1.5" class="w-5 h-5 text-white"></i>
                             </div>
                         </div>
                         <div class="p-8 relative z-10">
-                            <h3 class="font-serif text-2xl font-bold mb-4">Clínica Boutique</h3>
-                            <p class="text-blue-100 mb-6 line-clamp-3">Medicina preventiva e curativa com equipamentos de diagnósticos avançados, em um ambiente que não parece e não tem cheiro de hospital.</p>
-                            <ul class="space-y-3 mb-8">
-                                <li class="flex items-center text-sm font-medium"><i data-lucide="check" class="text-sand w-4 h-4 mr-2"></i> Consultas Preventivas</li>
-                                <li class="flex items-center text-sm font-medium"><i data-lucide="check" class="text-sand w-4 h-4 mr-2"></i> Vacinação Internacional</li>
-                                <li class="flex items-center text-sm font-medium"><i data-lucide="check" class="text-sand w-4 h-4 mr-2"></i> Exames Laboratoriais Express</li>
+                            <h3 class="text-2xl font-bold mb-4 text-white" style="font-family:'Playfair Display',serif;">Clínica Boutique</h3>
+                            <p class="text-blue-100 mb-6 text-sm leading-relaxed">Medicina preventiva com equipamentos de diagnóstico avançados, sem odores hospitalares.</p>
+                            <ul class="space-y-2 mb-8">
+                                <li class="flex items-center text-sm font-medium text-white"><i data-lucide="check" class="text-[#D4AF37] w-4 h-4 mr-2" stroke-width="2.5"></i>Consultas Preventivas</li>
+                                <li class="flex items-center text-sm font-medium text-white"><i data-lucide="check" class="text-[#D4AF37] w-4 h-4 mr-2" stroke-width="2.5"></i>Vacinação Internacional</li>
+                                <li class="flex items-center text-sm font-medium text-white"><i data-lucide="check" class="text-[#D4AF37] w-4 h-4 mr-2" stroke-width="2.5"></i>Exames Laboratoriais Express</li>
                             </ul>
-                            <a href="#contato" class="text-sand font-bold text-sm uppercase tracking-widest hover:text-white transition-colors inline-flex items-center">
+                            <a href="#contato" class="text-[#D4AF37] font-bold text-xs uppercase tracking-widest hover:text-white transition-colors inline-flex items-center">
                                 Agendar <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Service 3 -->
-                    <div class="bg-white rounded-3xl overflow-hidden card-premium border border-gray-100" data-animate="fade-up" data-stagger="300">
+                    <!-- Hotel Card -->
+                    <div class="bg-white rounded-3xl overflow-hidden card-premium border border-gray-100 shadow-sm" data-animate="fade-up" data-stagger="300">
                         <div class="h-64 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=800" alt="Hospedagem VIP para Pets" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-full text-midnight">
-                                <i data-lucide="moon" stroke-width="1.5"></i>
+                            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=800" alt="Hospedagem VIP para Pets" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-full text-[#1A365D]">
+                                <i data-lucide="moon" stroke-width="1.5" class="w-5 h-5"></i>
                             </div>
                         </div>
                         <div class="p-8">
-                            <h3 class="font-serif text-2xl text-midnight font-bold mb-4">Hospedagem VIP</h3>
-                            <p class="text-slate mb-6 line-clamp-3">Suítes individuais com climatização, musicoterapia e monitoramento por câmeras 24h para você acompanhar a estadia através do seu celular.</p>
-                            <ul class="space-y-3 mb-8">
-                                <li class="flex items-center text-sm text-charcoal font-medium"><i data-lucide="check" class="text-midnight w-4 h-4 mr-2"></i> Suítes Climatizadas 24h</li>
-                                <li class="flex items-center text-sm text-charcoal font-medium"><i data-lucide="check" class="text-midnight w-4 h-4 mr-2"></i> Monitoramento via App</li>
-                                <li class="flex items-center text-sm text-charcoal font-medium"><i data-lucide="check" class="text-midnight w-4 h-4 mr-2"></i> Recreação Dirigida</li>
+                            <h3 class="text-2xl text-[#1A365D] font-bold mb-4" style="font-family:'Playfair Display',serif;">Hospedagem VIP</h3>
+                            <p class="text-[#4B5563] mb-6 text-sm leading-relaxed">Suítes individuais com climatização, musicoterapia e câmeras 24h para você acompanhar pelo celular.</p>
+                            <ul class="space-y-2 mb-8">
+                                <li class="flex items-center text-sm text-[#111827] font-medium"><i data-lucide="check" class="text-[#1A365D] w-4 h-4 mr-2" stroke-width="2.5"></i>Suítes Climatizadas 24h</li>
+                                <li class="flex items-center text-sm text-[#111827] font-medium"><i data-lucide="check" class="text-[#1A365D] w-4 h-4 mr-2" stroke-width="2.5"></i>Monitoramento via App</li>
+                                <li class="flex items-center text-sm text-[#111827] font-medium"><i data-lucide="check" class="text-[#1A365D] w-4 h-4 mr-2" stroke-width="2.5"></i>Recreação Dirigida</li>
                             </ul>
-                            <a href="#contato" class="text-midnight font-bold text-sm uppercase tracking-widest hover:text-slate transition-colors inline-flex items-center">
+                            <a href="#contato" class="text-[#1A365D] font-bold text-xs uppercase tracking-widest hover:text-[#4B5563] transition-colors inline-flex items-center">
                                 Agendar <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
                             </a>
                         </div>
@@ -335,93 +417,81 @@
             </div>
         </section>
 
-        <!-- Portfólio (Antes & Depois / Lifestyle) -->
+        <!-- ===================== PORTFÓLIO ===================== -->
         <section id="portfolio" class="py-24 bg-white">
             <div class="container mx-auto px-6 md:px-12">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
                     <div class="max-w-2xl" data-animate="fade-up">
-                        <span class="text-sm font-semibold tracking-widest text-midnight uppercase block mb-4">Galeria</span>
-                        <h2 class="font-serif text-3xl md:text-5xl text-midnight font-bold">
-                            Momentos Vila Vitória
-                        </h2>
+                        <span class="text-xs font-semibold tracking-[0.2em] text-[#1A365D] uppercase block mb-4">Galeria</span>
+                        <h2 class="text-3xl md:text-5xl text-[#1A365D] font-bold" style="font-family:'Playfair Display',serif;">Momentos Vila Vitória</h2>
                     </div>
                 </div>
 
-                <!-- Grid de Fotos -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- Foto 1 -->
-                    <div class="portfolio-card relative rounded-2xl overflow-hidden portfolio-img-container h-80" data-animate="fade-up" data-stagger="100">
-                        <img src="https://images.unsplash.com/photo-1590518779601-527bf1c385ce?auto=format&fit=crop&q=80&w=800" alt="Cachorro Feliz pós banho" class="w-full h-full object-cover portfolio-img" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            <span class="text-white font-medium">Tosa Poodle Premium</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div class="portfolio-card relative rounded-2xl overflow-hidden h-80" data-animate="fade-up" data-stagger="100">
+                        <img src="https://images.unsplash.com/photo-1601979031925-424e53b6caaa?auto=format&fit=crop&q=80&w=800" alt="Tosa Poodle Premium" class="w-full h-full object-cover portfolio-img" loading="eager" />
+                        <div class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-[#1A365D]/85 via-transparent to-transparent flex items-end p-6">
+                            <span class="text-white font-semibold">Tosa Poodle Premium</span>
                         </div>
                     </div>
-                    
-                    <!-- Foto 2 -->
-                    <div class="portfolio-card relative rounded-2xl overflow-hidden portfolio-img-container h-80" data-animate="fade-up" data-stagger="200">
-                        <img src="https://images.unsplash.com/photo-1537151608804-ea2fce8f4b00?auto=format&fit=crop&q=80&w=800" alt="Golden Retriever em avaliação clínica" class="w-full h-full object-cover portfolio-img" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            <span class="text-white font-medium">Acompanhamento Clínico</span>
+                    <div class="portfolio-card relative rounded-2xl overflow-hidden h-80" data-animate="fade-up" data-stagger="200">
+                        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=800" alt="Acompanhamento Clínico" class="w-full h-full object-cover portfolio-img" loading="eager" />
+                        <div class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-[#1A365D]/85 via-transparent to-transparent flex items-end p-6">
+                            <span class="text-white font-semibold">Acompanhamento Clínico</span>
                         </div>
                     </div>
-
-                    <!-- Foto 3 -->
-                    <div class="portfolio-card relative rounded-2xl overflow-hidden portfolio-img-container h-80" data-animate="fade-up" data-stagger="300">
-                        <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=800" alt="Hospedagem VIP Cães" class="w-full h-full object-cover portfolio-img" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            <span class="text-white font-medium">Lounge de Hospedagem</span>
+                    <div class="portfolio-card relative rounded-2xl overflow-hidden h-80" data-animate="fade-up" data-stagger="300">
+                        <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=800" alt="Lounge de Hospedagem" class="w-full h-full object-cover portfolio-img" loading="eager" />
+                        <div class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-[#1A365D]/85 via-transparent to-transparent flex items-end p-6">
+                            <span class="text-white font-semibold">Lounge de Hospedagem</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Perguntas Frequentes (FAQ) -->
-        <section id="faq" class="py-24 bg-pearl border-t border-gray-200">
+        <!-- ===================== FAQ ===================== -->
+        <section id="faq" class="py-24 bg-[#FCFAF8] border-t border-gray-100">
             <div class="container mx-auto px-6 md:px-12">
                 <div class="text-center max-w-2xl mx-auto mb-16" data-animate="fade-up">
-                    <span class="text-sm font-semibold tracking-widest text-midnight uppercase block mb-4">Dúvidas Comuns</span>
-                    <h2 class="font-serif text-3xl md:text-5xl text-midnight font-bold">
-                        FAQ
-                    </h2>
+                    <span class="text-xs font-semibold tracking-[0.2em] text-[#1A365D] uppercase block mb-4">Dúvidas Comuns</span>
+                    <h2 class="text-3xl md:text-5xl text-[#1A365D] font-bold" style="font-family:'Playfair Display',serif;">FAQ</h2>
                 </div>
 
                 <div class="max-w-3xl mx-auto space-y-4">
-                    <!-- FAQ Item 1 -->
+                    <!-- FAQ 1 -->
                     <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-animate="fade-up" data-stagger="100">
-                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-midnight/20" aria-expanded="false">
-                            <span class="font-bold text-charcoal pr-8">Como funciona a segurança durante o banho?</span>
-                            <i data-lucide="chevron-down" class="faq-icon text-slate w-5 h-5 flex-shrink-0" stroke-width="2"></i>
+                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1A365D]/30" aria-expanded="false">
+                            <span class="font-bold text-[#111827] pr-8">Como funciona a segurança durante o banho?</span>
+                            <i data-lucide="chevron-down" class="faq-icon text-[#4B5563] w-5 h-5 flex-shrink-0" stroke-width="2"></i>
                         </button>
-                        <div class="faq-content bg-sand/30">
-                            <div class="px-6 pb-5 pt-1 text-slate text-sm leading-relaxed">
-                                 Nossas instalações de banho possuem portas de vidro temperado de alta segurança. Os animais são sempre manipulados por equipe treinada, com guias duplas e em banheiras ergonômicas que evitam qualquer risco de queda. Além disso, você pode acompanhar tudo através do vidro na nossa recepção.
+                        <div class="faq-content">
+                            <div class="px-6 pb-5 pt-1 text-[#4B5563] text-sm leading-relaxed">
+                                Nossas instalações possuem portas de vidro temperado. Os animais são sempre manipulados por equipe treinada, com guias duplas e em banheiras ergonômicas que evitam qualquer risco de queda.
                             </div>
                         </div>
                     </div>
-
-                    <!-- FAQ Item 2 -->
+                    <!-- FAQ 2 -->
                     <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-animate="fade-up" data-stagger="200">
-                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-midnight/20" aria-expanded="false">
-                            <span class="font-bold text-charcoal pr-8">Quais marcas de produtos estéticos vocês utilizam?</span>
-                            <i data-lucide="chevron-down" class="faq-icon text-slate w-5 h-5 flex-shrink-0" stroke-width="2"></i>
+                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1A365D]/30" aria-expanded="false">
+                            <span class="font-bold text-[#111827] pr-8">Quais marcas de produtos estéticos vocês utilizam?</span>
+                            <i data-lucide="chevron-down" class="faq-icon text-[#4B5563] w-5 h-5 flex-shrink-0" stroke-width="2"></i>
                         </button>
-                        <div class="faq-content bg-sand/30">
-                            <div class="px-6 pb-5 pt-1 text-slate text-sm leading-relaxed">
-                                Trabalhamos exclusivamente com linhas premium globais. Nossos shampoos e condicionadores são hipoalergênicos e formulados com ingredientes naturais. Para hidratações profundas, usamos máscaras ricas em óleos essenciais aprovadas pelos melhores dermatologistas veterinários.
+                        <div class="faq-content">
+                            <div class="px-6 pb-5 pt-1 text-[#4B5563] text-sm leading-relaxed">
+                                Trabalhamos exclusivamente com linhas premium globais. Shampoos e condicionadores hipoalergênicos, formulados com ingredientes naturais aprovados por dermatologistas veterinários.
                             </div>
                         </div>
                     </div>
-
-                    <!-- FAQ Item 3 -->
+                    <!-- FAQ 3 -->
                     <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-animate="fade-up" data-stagger="300">
-                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-midnight/20" aria-expanded="false">
-                            <span class="font-bold text-charcoal pr-8">Qual o tempo médio de espera para banho e tosa?</span>
-                            <i data-lucide="chevron-down" class="faq-icon text-slate w-5 h-5 flex-shrink-0" stroke-width="2"></i>
+                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1A365D]/30" aria-expanded="false">
+                            <span class="font-bold text-[#111827] pr-8">Qual o tempo médio de espera para banho e tosa?</span>
+                            <i data-lucide="chevron-down" class="faq-icon text-[#4B5563] w-5 h-5 flex-shrink-0" stroke-width="2"></i>
                         </button>
-                        <div class="faq-content bg-sand/30">
-                            <div class="px-6 pb-5 pt-1 text-slate text-sm leading-relaxed">
-                                Trabalhamos com sistema de agendamento preciso para evitar que seu pet fique horas em gaiolas d'água. Em média, um banho e tosa leva de 1,5 a 2 horas. Avisamos por WhatsApp 30 minutos antes da finalização para que você possa se programar.
+                        <div class="faq-content">
+                            <div class="px-6 pb-5 pt-1 text-[#4B5563] text-sm leading-relaxed">
+                                Trabalhamos com agendamento preciso. Em média, banho e tosa levam de 1,5 a 2 horas. Avisamos por WhatsApp 30 minutos antes da finalização.
                             </div>
                         </div>
                     </div>
@@ -429,159 +499,149 @@
             </div>
         </section>
 
-        <!-- Formulário de Contato e Captação de Leads -->
-        <section id="contato" class="py-24 bg-midnight text-white relative overflow-hidden">
-            <!-- Background Elements -->
-            <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-white opacity-5 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-            <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-sand opacity-5 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
-            
+        <!-- ===================== CONTATO ===================== -->
+        <section id="contato" class="py-24 bg-[#1A365D] text-white relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-[700px] h-[700px] bg-white opacity-5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/3 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#D4AF37] opacity-5 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+
             <div class="container mx-auto px-6 md:px-12 relative z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    
-                    <!-- Form Text -->
+
+                    <!-- Text -->
                     <div data-animate="fade-up">
-                        <span class="text-sm font-semibold tracking-widest text-sand uppercase block mb-4">Agendamento Exclusive</span>
-                        <h2 class="font-serif text-3xl md:text-5xl font-bold mb-6">
+                        <span class="text-xs font-semibold tracking-[0.2em] text-[#D4AF37] uppercase block mb-4">Agendamento Exclusivo</span>
+                        <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white" style="font-family:'Playfair Display',serif;">
                             Permita-nos cuidar do seu melhor amigo.
                         </h2>
                         <p class="text-blue-100 text-lg mb-8 max-w-md leading-relaxed">
                             Preencha os dados abaixo e entraremos em contato em até 15 minutos para confirmar o melhor horário.
                         </p>
-                        
-                        <div class="space-y-4 mb-8">
-                            <div class="flex items-center text-blue-50">
-                                <i data-lucide="map-pin" class="w-5 h-5 mr-3 text-sand" stroke-width="1.5"></i> Setor Marista, Goiânia - GO
+                        <div class="space-y-4">
+                            <div class="flex items-center text-blue-100 text-sm">
+                                <i data-lucide="map-pin" class="w-5 h-5 mr-3 text-[#D4AF37]" stroke-width="1.5"></i> Setor Marista, Goiânia – GO
                             </div>
-                            <div class="flex items-center text-blue-50">
-                                <i data-lucide="phone" class="w-5 h-5 mr-3 text-sand" stroke-width="1.5"></i> (62) 99999-0000
+                            <div class="flex items-center text-blue-100 text-sm">
+                                <i data-lucide="phone" class="w-5 h-5 mr-3 text-[#D4AF37]" stroke-width="1.5"></i> (62) 99999-0000
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Form Container -->
-                    <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl" data-animate="zoom-in" data-stagger="200">
-                        <form class="space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Form -->
+                    <div class="bg-white rounded-3xl p-8 md:p-10 shadow-2xl" data-animate="zoom-in" data-stagger="200">
+                        <form id="contact-form" novalidate class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
-                                    <label for="nome" class="block text-sm font-medium text-slate mb-2">Seu Nome</label>
-                                    <input type="text" id="nome" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-midnight/50 focus:border-midnight/50 bg-pearl text-charcoal transition-all" placeholder="Ex: Maria Silva" required>
+                                    <label for="nome" class="block text-xs font-semibold text-[#4B5563] uppercase tracking-wider mb-2">Seu Nome</label>
+                                    <input type="text" id="nome" name="nome" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1A365D]/40 bg-[#FCFAF8] text-[#111827] text-sm transition-all" placeholder="Ex: Maria Silva" required>
                                 </div>
                                 <div>
-                                    <label for="telefone" class="block text-sm font-medium text-slate mb-2">WhatsApp</label>
-                                    <input type="tel" id="telefone" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-midnight/50 focus:border-midnight/50 bg-pearl text-charcoal transition-all" placeholder="(00) 00000-0000" required>
+                                    <label for="telefone" class="block text-xs font-semibold text-[#4B5563] uppercase tracking-wider mb-2">WhatsApp</label>
+                                    <input type="tel" id="telefone" name="telefone" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1A365D]/40 bg-[#FCFAF8] text-[#111827] text-sm transition-all" placeholder="(00) 00000-0000" required>
                                 </div>
                             </div>
-                            
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
-                                    <label for="pet" class="block text-sm font-medium text-slate mb-2">Nome do Pet</label>
-                                    <input type="text" id="pet" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-midnight/50 focus:border-midnight/50 bg-pearl text-charcoal transition-all" placeholder="Ex: Thor">
+                                    <label for="pet" class="block text-xs font-semibold text-[#4B5563] uppercase tracking-wider mb-2">Nome do Pet</label>
+                                    <input type="text" id="pet" name="pet" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1A365D]/40 bg-[#FCFAF8] text-[#111827] text-sm transition-all" placeholder="Ex: Thor">
                                 </div>
                                 <div>
-                                    <label for="servico" class="block text-sm font-medium text-slate mb-2">Serviço Desejado</label>
-                                    <select id="servico" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-midnight/50 focus:border-midnight/50 bg-pearl text-charcoal transition-all appearance-none cursor-pointer">
-                                        <option value="banho">Spa & Estética</option>
+                                    <label for="servico" class="block text-xs font-semibold text-[#4B5563] uppercase tracking-wider mb-2">Serviço</label>
+                                    <select id="servico" name="servico" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1A365D]/40 bg-[#FCFAF8] text-[#111827] text-sm transition-all cursor-pointer">
+                                        <option value="banho">Spa &amp; Estética</option>
                                         <option value="clinica">Consulta Clínica</option>
                                         <option value="hotel">Hospedagem VIP</option>
                                         <option value="outro">Outro</option>
                                     </select>
                                 </div>
                             </div>
-                            
-                            <button type="button" class="w-full py-4 px-6 bg-midnight text-white text-base font-bold rounded-xl hover:bg-midnight/90 transition-all hover:shadow-lg mt-4 flex items-center justify-center">
-                                Solicitar Agendamento <i data-lucide="send" class="ml-2 w-4 h-4"></i>
+                            <button type="submit" class="w-full py-4 px-6 bg-[#1A365D] text-white font-bold rounded-xl hover:bg-[#1A365D]/90 transition-all hover:shadow-lg flex items-center justify-center gap-2 text-sm">
+                                Solicitar Agendamento <i data-lucide="send" class="w-4 h-4"></i>
                             </button>
-                            <p class="text-xs text-center text-slate mt-4">Seus dados estão seguros conosco.</p>
+                            <p class="text-xs text-center text-[#4B5563] mt-2">Seus dados estão protegidos.</p>
                         </form>
                     </div>
+
                 </div>
             </div>
         </section>
-
-        <!-- Rodapé Completo -->
-        <footer class="bg-charcoal text-white pt-20 pb-10 border-t border-gray-800">
-            <div class="container mx-auto px-6 md:px-12">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                    
-                    <!-- Branding -->
-                    <div class="col-span-1 lg:col-span-1" data-animate="fade-up" data-stagger="100">
-                        <a href="#" class="flex flex-col items-start mb-6">
-                            <span class="font-serif text-3xl font-bold text-white tracking-tight leading-none">Vila Vitória</span>
-                            <span class="text-[0.65rem] tracking-[0.2em] font-medium text-sand uppercase mt-1">Pet Boutique</span>
-                        </a>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                            A excelência em cada detalhe, o carinho que eles merecem. Referência em estética e saúde animal.
-                        </p>
-                        <div class="flex items-center gap-4">
-                            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-charcoal transition-colors">
-                                <i data-lucide="instagram" class="w-4 h-4" stroke-width="1.5"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-charcoal transition-colors">
-                                <i data-lucide="facebook" class="w-4 h-4" stroke-width="1.5"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Links Rápidos -->
-                    <div data-animate="fade-up" data-stagger="200">
-                        <h4 class="font-bold text-lg mb-6 text-white">Navegação</h4>
-                        <ul class="space-y-4">
-                            <li><a href="#sobre" class="text-gray-400 hover:text-white transition-colors text-sm">Nossa Filosofia</a></li>
-                            <li><a href="#servicos" class="text-gray-400 hover:text-white transition-colors text-sm">Serviços Premium</a></li>
-                            <li><a href="#portfolio" class="text-gray-400 hover:text-white transition-colors text-sm">Galeria Lifestyle</a></li>
-                            <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors text-sm">Perguntas Frequentes</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Contato e Endereço -->
-                    <div data-animate="fade-up" data-stagger="300">
-                        <h4 class="font-bold text-lg mb-6 text-white">Contato</h4>
-                        <ul class="space-y-4">
-                            <li class="flex items-start text-gray-400 text-sm">
-                                <i data-lucide="map-pin" class="w-4 h-4 mr-3 mt-0.5 text-sand flex-shrink-0" stroke-width="1.5"></i>
-                                <span>Av. T-9 com Rua 146, Setor Marista<br>Goiânia - GO, 74000-000</span>
-                            </li>
-                            <li class="flex items-center text-gray-400 text-sm hover:text-white transition-colors cursor-pointer">
-                                <i data-lucide="phone" class="w-4 h-4 mr-3 text-sand" stroke-width="1.5"></i> (62) 3999-0000
-                            </li>
-                            <li class="flex items-center text-gray-400 text-sm hover:text-white transition-colors cursor-pointer">
-                                <i data-lucide="mail" class="w-4 h-4 mr-3 text-sand" stroke-width="1.5"></i> contato@vilavitoria.com.br
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Newsletter -->
-                    <div data-animate="fade-up" data-stagger="400">
-                        <h4 class="font-bold text-lg mb-6 text-white">Newsletter</h4>
-                        <p class="text-gray-400 text-sm mb-4">Receba dicas de bem-estar pet e novidades exclusivas.</p>
-                        <form class="flex">
-                            <input type="email" placeholder="Seu melhor e-mail" class="w-full px-4 py-3 rounded-l-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-sand text-sm">
-                            <button type="button" class="bg-sand text-charcoal px-4 py-3 rounded-r-xl hover:bg-white transition-colors flex items-center justify-center">
-                                <i data-lucide="arrow-right" class="w-4 h-4" stroke-width="2"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Copyright -->
-                <div class="border-t border-white/10 pt-8 mt-12 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500">
-                    <p>&copy; 2026 Pet Shop Vila Vitória. Todos os direitos reservados.</p>
-                    <div class="flex items-center gap-4 mt-4 md:mt-0">
-                        <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
-                        <span>|</span>
-                        <a href="#" class="hover:text-white transition-colors">Termos de Serviço</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
     </main>
 
-    <!-- Custom JS -->
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="bg-[#111827] text-white pt-20 pb-10">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-white/10">
+
+                <!-- Branding -->
+                <div data-animate="fade-up" data-stagger="100">
+                    <div class="mb-5">
+                        <span class="text-2xl font-bold text-white tracking-tight leading-none block" style="font-family:'Playfair Display',serif;">Vila Vitória</span>
+                        <span class="text-[0.62rem] tracking-[0.2em] font-semibold text-[#D4AF37] uppercase">Pet Boutique</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">A excelência em cada detalhe, o carinho que eles merecem.</p>
+                    <div class="flex items-center gap-3">
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-[#111827] transition-colors" aria-label="Instagram">
+                            <i data-lucide="instagram" class="w-4 h-4" stroke-width="1.5"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-[#111827] transition-colors" aria-label="Facebook">
+                            <i data-lucide="facebook" class="w-4 h-4" stroke-width="1.5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navegação -->
+                <div data-animate="fade-up" data-stagger="200">
+                    <h4 class="font-bold text-base mb-5 text-white">Navegação</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#sobre" class="text-gray-400 hover:text-white transition-colors text-sm">Nossa Filosofia</a></li>
+                        <li><a href="#servicos" class="text-gray-400 hover:text-white transition-colors text-sm">Serviços Premium</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-white transition-colors text-sm">Galeria Lifestyle</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors text-sm">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contato -->
+                <div data-animate="fade-up" data-stagger="300">
+                    <h4 class="font-bold text-base mb-5 text-white">Contato</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start text-gray-400 text-sm">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-3 mt-0.5 text-[#D4AF37] flex-shrink-0" stroke-width="1.5"></i>
+                            <span>Av. T-9 com Rua 146, Setor Marista<br>Goiânia – GO, 74000-000</span>
+                        </li>
+                        <li class="flex items-center text-gray-400 text-sm">
+                            <i data-lucide="phone" class="w-4 h-4 mr-3 text-[#D4AF37]" stroke-width="1.5"></i> (62) 3999-0000
+                        </li>
+                        <li class="flex items-center text-gray-400 text-sm">
+                            <i data-lucide="mail" class="w-4 h-4 mr-3 text-[#D4AF37]" stroke-width="1.5"></i> contato@vilavitoria.com.br
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div data-animate="fade-up" data-stagger="400">
+                    <h4 class="font-bold text-base mb-5 text-white">Newsletter</h4>
+                    <p class="text-gray-400 text-sm mb-4">Dicas de bem-estar e novidades exclusivas.</p>
+                    <form class="flex" novalidate>
+                        <input type="email" placeholder="Seu e-mail" class="w-full px-4 py-3 rounded-l-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[#D4AF37] text-sm placeholder:text-gray-600">
+                        <button type="submit" class="bg-[#D4AF37] text-[#111827] px-4 py-3 rounded-r-xl hover:bg-white transition-colors flex items-center justify-center" aria-label="Inscrever na newsletter">
+                            <i data-lucide="arrow-right" class="w-4 h-4" stroke-width="2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+                <p>&copy; 2026 Pet Shop Vila Vitória. Todos os direitos reservados.</p>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    <span>|</span>
+                    <a href="#" class="hover:text-white transition-colors">Termos de Serviço</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script src="script.js"></script>
-    <script>
-        // Inicializar ícones (temp para testar)
-        lucide.createIcons();
-    </script>
 </body>
 </html>

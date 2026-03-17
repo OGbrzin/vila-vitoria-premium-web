@@ -1,0 +1,154 @@
+/* =========================================================================
+   Pet Shop Vila Vitória - Tailwind CSS v4 & Custom Styles
+   ========================================================================= */
+
+@theme {
+  --color-pearl: #FCFAF8;
+  --color-midnight: #1A365D;
+  --color-slate: #4B5563;
+  --color-charcoal: #111827;
+  --color-gold: #D4AF37; /* A subtle accent color for luxury feel */
+  --color-sand: #F3F0EB;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Playfair Display', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+
+  /* Custom Animations */
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-zoom-in: zoom-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Offset for sticky header */
+}
+
+body {
+  background-color: var(--color-pearl);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
+
+/* Glassmorphism Header */
+.header-glass {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: rgba(229, 231, 235, 0.5); /* tailwind gray-200 */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Custom Scrollbar for elegant feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-pearl);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* tailwind slate-300 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-slate);
+}
+
+/* =========================================================================
+   Animation Classes (Triggered via JS Intersection Observer)
+   ========================================================================= */
+
+/* Initial state for elements to be animated */
+.reveal {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Fade Up */
+.reveal.fade-up {
+  transform: translateY(30px);
+}
+
+/* Zoom In */
+.reveal.zoom-in {
+  transform: scale(0.95);
+}
+
+/* Active state triggered by JS */
+.reveal.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s linear 0s;
+}
+
+/* Stagger Delays */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* =========================================================================
+   Component Sub-styles
+   ========================================================================= */
+
+/* Premium Card Hover Effect */
+.card-premium {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.card-premium:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Portfolio Image Zoom */
+.portfolio-img-container {
+  overflow: hidden;
+}
+
+.portfolio-img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolio-card:hover .portfolio-img {
+  transform: scale(1.05);
+}
+
+/* FAQ Accordion Toggle */
+.faq-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-out;
+}
+
+.faq-content > div {
+  overflow: hidden;
+}
+
+.faq-item.active .faq-content {
+  grid-template-rows: 1fr;
+}
+
+.faq-icon {
+  transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
